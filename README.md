@@ -3,6 +3,30 @@
 
 一个基于 PyQt6 的串口调试工具，支持命令快捷发送、语法高亮显示和配置管理。
 
+## 🚀 快速开始
+
+### 环境安装（确保已安装python）
+```bash
+pip install PyQt6 pyserial pygments
+```
+
+### 运行程序
+```bash
+python pyqt_serial.py  # 运行上位机示例
+python pyqt_serial2.py # 运行上位机完全体
+python pyqt_logo.py    # 查看qt自带logo
+```
+
+## 🖼️ 界面预览
+
+ pyqt_serial（默认配置）
+ 
+ ![样例1](https://github.com/user-attachments/assets/3a8379c2-3023-4ebf-be42-eb35bf4bb3c9) 
+ 
+ pyqt_serial2：
+ 
+ ![样例2](https://github.com/user-attachments/assets/2e7b23a2-27e9-4987-bb95-2db7c35966af)
+
 ## ✨ 功能特性
 
 - **串口通信**：支持常用波特率设置
@@ -11,29 +35,10 @@
 - **配置管理**：支持保存常用配置
 - **自动登录**：一键发送登录凭证
 
-## 🚀 快速开始
-
-### 环境安装
-```bash
-pip install PyQt6 pyserial pygments
-```
-
-### 运行程序
-```bash
-python pyqt_serial.py
-```
-
-## 🖼️ 界面预览
-
- ![样例1](https://github.com/user-attachments/assets/3a8379c2-3023-4ebf-be42-eb35bf4bb3c9) 
- 样例1
- ![样例2](https://github.com/user-attachments/assets/78eb6fe1-7b55-4004-8539-a771ac52cfdb) 
- 样例2
-
 ## 🛠️ 开发指南
 
 ### 自定义命令
-修改 `BUTTON_CONFIG` 和 `LIST_CONFIG` 变量：
+修改 `BUTTON_CONFIG` 和 `LIST_CONFIG` 默认按键配置：
 
 ```python
 # 下侧按钮
