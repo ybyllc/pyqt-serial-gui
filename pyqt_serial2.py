@@ -3,7 +3,7 @@ import importlib.util
 
 # 自动安装所需的python库
 def install_packages():
-    required_packages = ['pyserial', 'PyQt6', 'pygments'] # 所需的python库
+    required_packages = ['PyQt6', 'pyserial', 'pygments'] # 所需的python库
     
     for package in required_packages:
         try:
@@ -47,6 +47,18 @@ BUTTON_STYLE = """
     }
     QPushButton:pressed {
         background-color: #d0d0d0;
+    }
+    #refresh_button, #add_config_button {
+        background-color: white;
+    }
+    #open_close_button {
+        color: white;
+    }
+    #open_close_button[text="打开"] {
+        background-color: #ff8080;  /* 柔和的红色 */
+    }
+    #open_close_button[text="关闭"] {
+        background-color: #66bb6a;  /* 柔和的绿色 */
     }
 """
 
@@ -159,12 +171,14 @@ class SerialReceiver(QWidget):
 
         # 刷新串口按钮
         self.refresh_button = QPushButton("刷新")
+        self.refresh_button.setObjectName("refresh_button")  # 添加这行
         self.refresh_button.setStyleSheet(BUTTON_STYLE)
         self.refresh_button.clicked.connect(self.refresh_ports)
         config_layout.addWidget(self.refresh_button)
-
+        
         # 开关串口按钮
-        self.open_close_button = QPushButton("打开")
+        self.open_close_button = QPushButton("打开") 
+        self.open_close_button.setObjectName("open_close_button")  # 添加这行
         self.open_close_button.setStyleSheet(BUTTON_STYLE)
         self.open_close_button.clicked.connect(self.toggle_serial)
         config_layout.addWidget(self.open_close_button)
@@ -184,6 +198,7 @@ class SerialReceiver(QWidget):
         self.send_text.setPlaceholderText("输入要发送的内容")
         self.send_text.returnPressed.connect(self.send_data)  # 回车键 绑定"发送"事件
         send_button = QPushButton("发送")
+        send_button.setObjectName("refresh_button")
         send_button.setStyleSheet(BUTTON_STYLE)
         send_button.clicked.connect(self.send_data)
         
@@ -249,6 +264,7 @@ class SerialReceiver(QWidget):
         
         # 添加配置按钮放在最下面
         add_config_button = QPushButton("添加配置")
+        add_config_button.setObjectName("add_config_button")  # 添加这行
         add_config_button.setStyleSheet(BUTTON_STYLE)
         add_config_button.clicked.connect(self.show_config_dialog)
         right_layout.addWidget(add_config_button)
@@ -303,6 +319,7 @@ class SerialReceiver(QWidget):
                 baudrate = int(self.baudrate_combobox.currentText())
                 self.ser = serial.Serial(port, baudrate=baudrate, timeout=1)
                 self.open_close_button.setText("关闭")
+                self.open_close_button.setStyleSheet(BUTTON_STYLE)  # 确保样式更新
                 self.status_light.setStyleSheet("background-color: green; border-radius: 5px;")
                 self.receive_data()
             except serial.SerialException as e:
@@ -311,6 +328,7 @@ class SerialReceiver(QWidget):
         else:
             self.ser.close()
             self.open_close_button.setText("打开")
+            self.open_close_button.setStyleSheet(BUTTON_STYLE)  # 确保样式更新
             self.status_light.setStyleSheet("background-color: gray; border-radius: 5px;")
 
     def receive_data(self):
