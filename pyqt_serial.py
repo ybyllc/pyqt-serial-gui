@@ -1,21 +1,17 @@
+# 自动安装所需的python库
 import sys
 import importlib.util
+import subprocess
+required_packages = ['PyQt6', 'pyserial', 'pygments'] # 需要安装的库列表
+for package in required_packages:
+    try:
+        importlib.util.find_spec(package)
+    except ImportError:
+        print(f"未安装 {package}")
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', package]) # pip安装库
+        print(f"{package} 安装成功!")
 
-# 自动安装所需的python库
-def install_packages():
-    required_packages = ['pyserial', 'PyQt6', 'pygments'] # 所需的python库
-    
-    for package in required_packages:
-        try:
-            # 检测库是否已安装
-            importlib.util.find_spec(package)
-        except ImportError:
-            print(f"安装 {package}...")
-            subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
-            print(f"{package} 安装成功!")
-
-install_packages()
-
+# 导入库
 import serial
 import serial.tools.list_ports
 from PyQt6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
@@ -80,11 +76,12 @@ class SerialReceiver(QWidget):
         super().__init__()
         self.ser = None
         # 语法高亮的主题
-        self.highlight_style = get_style_by_name('xcode')  # 或者 'friendly', 'default', 'xcode', 'vs', 'tango', 'monokai'
+        self.highlight_style = get_style_by_name('xcode')  # 或者 'friendly', 'default', 'xcode', 'vs', 'tango', 'monokai' , 'pastie' 等，参考https://pygments.org/styles/
         self.initUI()
 
 
 
+    # 刷新界面
     def initUI(self):
         # 创建布局
         main_layout = QVBoxLayout()
@@ -207,7 +204,7 @@ class SerialReceiver(QWidget):
     
     def on_port_changed(self, port):
         """处理串口选择变更"""
-        # 如果当前有打开的串口，先关闭它
+        # 如果当前有打开的串口，先关闭
         if self.ser and self.ser.is_open:
             try:
                 self.ser.close()
