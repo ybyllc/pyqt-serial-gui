@@ -3,8 +3,6 @@
 
 一个基于 PyQt6 的串口调试工具，支持命令快捷发送、语法高亮显示和配置管理。
 
-## 🚀 快速开始
-
 ### 环境安装（确保已安装python）
 ```bash
 pip install PyQt6 pyserial pygments
