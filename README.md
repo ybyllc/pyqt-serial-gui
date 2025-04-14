@@ -13,7 +13,7 @@ pip install PyQt6 pyserial pygments
 ### 运行程序
 ```bash
 python pyqt_serial.py  # 运行上位机示例
-python pyqt_serial2.py # 运行上位机完全体
+python pyqt_serial2.py # 运行上位机示例2（完全体）
 python pyqt_logo.py    # 查看qt自带logo
 ```
 
