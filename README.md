@@ -3,6 +3,12 @@
 
 一个基于 PyQt6 的串口调试工具，支持命令快捷发送、语法高亮显示和配置管理。
 
+#### Python有几个比较流行的库实现界面：
+- Tkinter：最老牌，页面比较落后
+- ttkbootstrap：轻量化，简单替代Tkinter，实现现代化风格
+- NiceGUI：实现网页级别的现代化设计
+- PyQt：最自由和多平台化，能实现任何设计
+
 ### 环境安装（确保已安装python）
 ```bash
 pip install PyQt6 pyserial pygments
